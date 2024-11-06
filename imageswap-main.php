@@ -55,7 +55,7 @@ public function enque_scripts()
 	{
 			wp_enqueue_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js', null,null, true);
 			wp_enqueue_script('imageswap-js', plugin_dir_url(__DIR__).'imageswap-plugin/assets/js/imageswap-upload.js', [],null, true );
-			//wp_enqueue_script('imageswap-delete-js', plugin_dir_url(__DIR__).'imageswap-plugin/assets/js/imageswap-delete-from-cart.js', [],null, true );
+			
 	}
 //Add image upload field to products	
 public function add_upload_field()
@@ -97,19 +97,18 @@ public function upload_image(){
 			}
 			//If the file was uploaded send the response
 			if (move_uploaded_file($_FILES['uploaded_file']['tmp_name'], UPLOADDIR.'temp/'.$temp_file_name)) {
-				error_log('api response');
 				return new WP_REST_Response([
 					'status' => 'success',
 					'fileName' => $temp_file_name
 				], 200);
 			} else {
-				return new WP_REST_Response(['error' => 'Failed to move file'], 400);
+				return new WP_REST_Response(['error' => 'Nem sikerült a fájlt feltölteni.'], 400);
 			}
 		} else {
-			return new WP_REST_Response(['error' => 'Wrong file format'], 400);
+			return new WP_REST_Response(['error' => 'Rossz formátum.'], 400);
 		}
 	} else {
-		return new WP_REST_Response(['error' => 'Nincs fájl'], 400);
+		return new WP_REST_Response(['error' => 'Nincs fájl kijelölve'], 400);
 	}
 }
 	
@@ -132,10 +131,6 @@ function remove_from_cart($cart_item_key)
 		if($cart_item_key)
 	{$delete_helper=new DeleteProcess;
     $delete_helper->delete_image($cart_item_key);
-}
-
-function after_cart_loaded($cart_item_key){
-	$this->remove_from_cart($cart_item_key);
 }
 
 }

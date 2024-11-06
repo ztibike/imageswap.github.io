@@ -11,19 +11,18 @@ public function delete_image($cart_item_key) {
         
         $cart_item = $woocommerce->cart->removed_cart_contents[ $cart_item_key ];
         if ($cart_item['image_file_name'])
-        {if ($cart_item){
+        {
+            if ($cart_item){
             $image_file_name=$cart_item['image_file_name'];
            
         if($image_file_name){
             $file_path=UPLOADDIR.'temp/'.$image_file_name;
             if (file_exists($file_path)){
-                error_log('deleted');
                 unlink($file_path);
-            } else{
-                error_log('Hiba történt a törlés közben');
             }
         }
-    }}
+    }
+}
 
 }
 //delete uploaded temporary image if the image swap api send back the ready image

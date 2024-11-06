@@ -5,11 +5,8 @@ get_header();
 <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
         <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-            <header class="entry-header">
-                <h1 class="entry-title"> My Images</h1>
-            </header><!-- .entry-header -->
-
             <div class="entry-content">
+            <h1 class="entry-title"> My Images</h1>
 
 <?php
 //check if the user is logged in

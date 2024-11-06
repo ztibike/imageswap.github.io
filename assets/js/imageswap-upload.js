@@ -25,11 +25,12 @@ window.imageswap.uploadModule = (function ($) {
                 //send the AJAX request
                 uploadAjax(url, formData)
                     .then(() => {
+                        alert('A '+imageFileName+' kép sikeresen feltöltésre került!')
                         form.append('<input type="hidden" name="image_file_name" id="image_file_name" value="' + imageFileName + '">');
                         $('[name=add-to-cart]').trigger('click');
                     })
                     .catch(error => {
-                        alert('Error: ' + error);
+                        alert(error);
                     });
             } else {
                 alert('There is no file selected!');
